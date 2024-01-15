@@ -42,4 +42,18 @@ el lanzamiento ha sido exitoso o cancelado.
 - realice en el hilo de despacho de eventos de Swing, lo cual es esencial para mantener la estabilidad y el 
 - rendimiento de la aplicación
 
+## version 1.1
+### cambios en LaunchSimulator
+Se incorpora un registo de eventos más importantes en el archivo 'launch.log' en la carpeta 'logs' del proyecto.
+Se ha integrado java.util.logging para registrar los eventos en el archivo de log.
 
+### cambios en CountdownUI
+Se ha añadido soporte para java.util.logging a través de un objeto Logger.
+Se ha Modificado el constructor para aceptar un objeto Logger.
+Se ha Modificado la función startCountdown para incluir logging.
+
+### cambios en CountdownTask
+Se ha añadido soporte para java.util.logging a través de un objeto Logger.
+Se ha Modificado el constructor para aceptar un objeto Logger.
+Incorporado el logging de eventos utilizando java.util.logging.Logger. 
+Se ha añadido el objeto Logger al constructor y utilizado en el método run para registrar eventos.

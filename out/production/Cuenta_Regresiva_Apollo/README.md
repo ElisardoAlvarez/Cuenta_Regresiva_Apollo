@@ -20,13 +20,26 @@ el lanzamiento ha sido exitoso o cancelado.
 
 ##version 1.0
 
-
 ### Comentarios y Explicación
 
-- **`LaunchSimulator`**: Esta clase inicia la aplicación. Utiliza `SwingUtilities.invokeLater` para asegurarse de que la GUI se inicie en el hilo de despacho de eventos de Swing, que es el hilo apropiado para manejar componentes de la interfaz de usuario.
+- **`LaunchSimulator`**: 
+- Esta clase inicia la aplicación. 
+- Utiliza `SwingUtilities.invokeLater` para asegurarse de que la GUI se inicie en el hilo de despacho de 
+- eventos de Swing, que es el hilo apropiado para manejar componentes de la interfaz de usuario.
 
-- **`CountdownUI`**: Esta clase gestiona la interfaz gráfica de usuario. Incluye botones para iniciar y cancelar la cuenta regresiva, un campo de texto para ingresar los segundos, y una barra de progreso para mostrar el tiempo restante. Los métodos `startCountdown` y `cancelCountdown` manejan las acciones correspondientes a cada botón.
+- **`CountdownUI`**: 
+- Esta clase gestiona la interfaz gráfica de usuario. 
+- Incluye botones para iniciar y cancelar la cuenta regresiva, un campo de texto para ingresar los segundos, 
+- y una barra de progreso y un reloj MM:SS para mostrar el tiempo restante. 
+- Los métodos `startCountdown` y `cancelCountdown` manejan las acciones correspondientes a cada botón.
 
-- **`CountdownTask`**: Extiende la clase `Thread` y se encarga de la lógica de la cuenta regresiva. Actualiza la barra de progreso y maneja la interrupción de la cuenta regresiva si el usuario decide cancelarla.
+- **`CountdownTask`**: 
+- Extiende la clase `Thread` y se encarga de la lógica de la cuenta regresiva. 
+- Actualiza la barra de progreso y maneja la interrupción de la cuenta regresiva si el usuario decide cancelarla.
+- Se formatea el tiempo restante en el formato MM:SS y se muestra en la etiqueta de texto 
+- 'countdownLabel' de la interfaz de usuario.
+- Se utiliza `SwingUtilities.invokeLater` para asegurarse de que la actualización de la interfaz de usuario se 
+- realice en el hilo de despacho de eventos de Swing, lo cual es esencial para mantener la estabilidad y el 
+- rendimiento de la aplicación
 
 
