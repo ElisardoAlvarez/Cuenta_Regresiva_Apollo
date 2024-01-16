@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.logging.Logger;
 
 public class CountdownUI extends JFrame {
     private JButton startButton;
@@ -8,8 +9,10 @@ public class CountdownUI extends JFrame {
     private JTextField inputField;
     private JLabel countdownLabel;
     private CountdownTask countdownTask;
+    private Logger logger;
 
-    public CountdownUI() {
+    public CountdownUI(Logger logger) {
+        this.logger = logger;
         createUI();
     }
 
@@ -47,7 +50,7 @@ public class CountdownUI extends JFrame {
             return;
         }
 
-        countdownTask = new CountdownTask(seconds, this);
+        countdownTask = new CountdownTask(seconds, this, logger);
         countdownTask.start();
     }
 
