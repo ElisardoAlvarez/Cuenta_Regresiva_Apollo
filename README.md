@@ -18,7 +18,7 @@ Desarrolla una aplicación que simule la cuenta regresiva para el lanzamiento de
 3-Al finalizar la cuenta, se debe mostrar un mensaje en una ventana emergente que indique si
 el lanzamiento ha sido exitoso o cancelado.
 
-##version 1.0
+## version 1.0
 
 ### Comentarios y Explicación
 

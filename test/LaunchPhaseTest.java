@@ -27,7 +27,7 @@ public class LaunchPhaseTest {
         phase3.start();
         phase3.join();  // Asegura que la fase3 concluya antes de iniciar fase4
         phase4.start();
-        phase4.join();  // Asegura que la fase4 concluya
+        phase4.join();  // Asegura que la fase4 concluya antes de continuar
 
         // Verificar el estado final de cada fase
         assertTrue(phase1.isCompleted());
@@ -58,7 +58,7 @@ public class LaunchPhaseTest {
     }
     //Prueba de Transición de Estado de Fases
     @Test
-    public void testPhaseStateTransition() {
+    public void testPhaseStateTransition() throws InterruptedException {
         // Inicialización de una fase
         LaunchPhase phase = new LaunchPhase(1);
 
@@ -67,7 +67,7 @@ public class LaunchPhaseTest {
         phase.join();
 
         // Verificar la transición de estado
-        assertEquals(LaunchPhase.State.COMPLETED, phase.getState());
+        assertEquals(LaunchPhase.State.TERMINATED, phase.getState());
     }
 
 }

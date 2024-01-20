@@ -1,6 +1,8 @@
 package main;
 public class LaunchPhase {
-    public enum State { NOT_STARTED, ACTIVE, COMPLETED, CANCELLED }
+    public enum State { NOT_STARTED, ACTIVE, COMPLETED, CANCELLED;
+        public static final byte[] TERMINATED = null;
+    }
 
     private final int number;
     private State state;
