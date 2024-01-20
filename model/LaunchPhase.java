@@ -1,4 +1,4 @@
-package main;
+package model;
 
 /**
  * Clase que representa una fase de lanzamiento. Puede ser iniciada, completada o cancelada.

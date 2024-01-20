@@ -1,6 +1,6 @@
 package test;
 
-import main.LaunchPhase;
+import model.LaunchPhase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

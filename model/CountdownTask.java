@@ -1,3 +1,6 @@
+package model;
+
+import view.CountdownUI;
 import java.util.logging.Logger;
 
 /**
@@ -5,7 +8,7 @@ import java.util.logging.Logger;
  * Se encarga de realizar la cuenta atrás y de notificar a la interfaz de usuario sobre el progreso.
  */
 public class CountdownTask extends Thread {
-    private static final State RUNNING = State.RUNNING ;
+    private static final State RUNNING = State.RUNNING;
     private final int totalSeconds;
     private final CountdownUI ui;
     private final Logger logger;
@@ -34,7 +37,7 @@ public class CountdownTask extends Thread {
         int remainingSeconds = totalSeconds;
         while (remainingSeconds > 0 && running) {
             // Actualizar la interfaz de usuario con el tiempo restante
-            ui.updateCountdown(remainingSeconds);
+            ui.update(remainingSeconds);
 
             try {
                 // Esperar un segundo
@@ -64,14 +67,22 @@ public class CountdownTask extends Thread {
         this.interrupt(); // Interrumpir el hilo si está en un estado de espera (sleep)
     }
 
+    /**
+     * Devuelve el estado actual de la tarea.
+     *
+     * @return el estado actual de la tarea
+     */
     public State getCurrentState() {
-if (running) {
+        if (running) {
             return RUNNING;
         } else {
             return State.BLOCKED;
         }
     }
 
+    /**
+     * Enumeración de los posibles estados de la tarea.
+     */
     public enum State {
         NEW,
         RUNNING,

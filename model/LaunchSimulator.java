@@ -1,10 +1,12 @@
+package model;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.*;
 
 /**
- * LaunchSimulator es la clase principal para el Simulador de Lanzamiento Apollo 11.
+ * model.LaunchSimulator es la clase principal para el Simulador de Lanzamiento Apollo 11.
  * Configura el logger y crea la UI. La cuenta regresiva comienza con la entrada del usuario.
  */
 public class LaunchSimulator {
