@@ -8,6 +8,7 @@ import java.util.logging.Logger;
  * Proporciona controles para iniciar y cancelar la cuenta atrás, muestra el tiempo restante y visualiza la animación del cohete.
  */
 public class CountdownUI extends JFrame {
+    private SoundPlayer soundPlayer; // Reproductor de sonidos.
     private JButton startButton;
     private JButton cancelButton;
     private JTextField inputField;
@@ -26,6 +27,7 @@ public class CountdownUI extends JFrame {
         createUIComponents();
         layoutComponents();
         attachEventHandlers();
+        soundPlayer = new SoundPlayer(); // Inicializa el reproductor de sonidos.
     }
 
     /**
@@ -70,6 +72,8 @@ public class CountdownUI extends JFrame {
 
     private void startCountdown(ActionEvent e) {
         int seconds;
+        soundPlayer.playSound("/sounds/tic-tac-27828.mp3"); // Reproduce el sonido al iniciar la cuenta regresiva.
+
         try {
             seconds = Integer.parseInt(inputField.getText());
         } catch (NumberFormatException ex) {
@@ -92,6 +96,7 @@ public class CountdownUI extends JFrame {
     }
 
     public void showCompletionMessage(boolean isCancelled) {
+
         String message = isCancelled ? "Launch Cancelled" : "Launch Successful";
         JOptionPane.showMessageDialog(this, message);
         showFinalMessage(isCancelled);
@@ -104,7 +109,10 @@ public class CountdownUI extends JFrame {
     public void updateCountdown(int remainingSeconds) {
         SwingUtilities.invokeLater(() -> {
             countdownLabel.setText(formatTime(remainingSeconds));
-            rocketAnimationPanel.updatePosition(); // Actualiza la posición del cohete con cada tick de la cuenta regresiva.
+            rocketAnimationPanel.updatePosition(); // Actualiza la posición del cohete.
+            if (remainingSeconds > 0) {
+                soundPlayer.playSound("/sounds/tick.wav"); // Reproduce un tic-tac cada segundo.
+            }
         });
     }
 

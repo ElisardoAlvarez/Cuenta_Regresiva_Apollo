@@ -109,4 +109,7 @@ Se añade soporte para cuatro hilos en CountdownUI.
 se crea la clase RocketAnimationPanel es responsable de la visualización del cohete y su animación.
 En CountdownUI, se crea una instancia de RocketAnimationPanel y se añade al layout.
 El método updateCountdown de CountdownUI ahora también llama a updatePosition de RocketAnimationPanel para actualizar la posición del cohete con cada tick de la cuenta regresiva.
-
+### version 4.1.2 se añade sonido en la interfaz gráfica
+Se crea la clase SoundPlayer para reproducir sonidos.
+Se crea la carpeta resources/sounds y se añade el archivo 'tic-tac-27828.mp3'.
+Se crea el método playSound en CountdownUI para reproducir el sonido.
