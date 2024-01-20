@@ -75,14 +75,14 @@ Se crea el método setState de la clase MonitorTask.
 Se crea el método getState de la clase MonitorTask.
 Se crea el método logState de la clase MonitorTask.
 
-##Versión 3.0 Reestructuración de directorios main y test para soporte de múltiples hilos
-### creación de package main y refactor de las clases
-Se crea el package main.
-Se mueven las clases CountdownTask, LaunchSimulator y MonitorTask al package main.
-Se crea la clase LaunchPhase.java en el package main.
+##Versión 3.0 Reestructuración de directorios src.main y src.test para soporte de múltiples hilos
+### creación de package src.main y refactor de las clases
+Se crea el package src.main.
+Se mueven las clases CountdownTask, LaunchSimulator y MonitorTask al package src.main.
+Se crea la clase LaunchPhase.java en el package src.main.
 
-### creación de package test
-Se crea el package test. 
+### creación de package src.test
+Se crea el package src.test. 
 Se crea la clase **LaunchPhaseTest.java** con los TDD.
 Se crea la prueba de **Inicio Secuencial de Fases**
 Esta prueba verifica la ejecución secuencial de las fases del lanzamiento. Cada fase debe empezar solo después de que la anterior haya terminado. Si todas las fases alcanzan el estado COMPLETED, la prueba pasa.
@@ -92,4 +92,14 @@ Esta prueba asegura que si una fase se cancela, no debería iniciarse. Se consid
 
 Se crea la prueba de **Transición de Estado de Fases**
 Esta prueba verifica la correcta transición de estados en una fase. Una fase debe poder pasar de INICIADA a COMPLETADA. La prueba es exitosa si la fase alcanza el estado COMPLETED.
+
+## Versión 4.0 se añade soporte para cuatro hilos pruebas de TDD
+Se modifica la estructura del proyecto para adecuarse al estandard de Maven.
+Se añade soporte para cuatro hilos.
+Se añade soporte para cuatro hilos en LaunchSimulator.
+Se añade soporte para cuatro hilos en CountdownTask.
+Se añade soporte para cuatro hilos en MonitorTask.
+Se añade soporte para cuatro hilos en LaunchPhase.
+Se añade soporte para cuatro hilos en LaunchPhaseTest.
+Se añade soporte para cuatro hilos en CountdownUI.
 

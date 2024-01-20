@@ -1,0 +1,29 @@
+<configuration scan="true" scanPeriod="30 seconds">
+    <!-- Definir appender de archivo -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- Ruta del archivo de log -->
+        <file>logs/test.log</file>
+
+        <!-- Definir política de rotación basada en el tamaño del archivo o la fecha -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Archivo de log diario -->
+            <fileNamePattern>logs/test.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- Máximo histórico de archivos de log -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <!-- Codificador para el formato del mensaje -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Asignar nivel de log y appender al logger raíz -->
+    <root level="DEBUG">
+        <appender-ref ref="FILE" />
+    </root>
+
+    <!-- Configuración para registrar problemas internos de Logback -->
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+</configuration>
+

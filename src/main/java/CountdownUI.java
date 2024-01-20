@@ -1,5 +1,3 @@
-package main;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +17,7 @@ public class CountdownUI extends JFrame {
 
     /**
      * Constructor para CountdownUI.
+     *
      * @param logger Logger para registrar eventos.
      */
     public CountdownUI(Logger logger) {
@@ -56,6 +55,7 @@ public class CountdownUI extends JFrame {
 
     /**
      * Maneja la acción de inicio de la cuenta atrás.
+     *
      * @param e Evento de acción.
      */
     private void startCountdown(ActionEvent e) {
@@ -73,6 +73,7 @@ public class CountdownUI extends JFrame {
 
     /**
      * Maneja la acción de cancelación de la cuenta atrás.
+     *
      * @param e Evento de acción.
      */
     private void cancelCountdown(ActionEvent e) {
@@ -83,6 +84,7 @@ public class CountdownUI extends JFrame {
 
     /**
      * Actualiza la etiqueta del tiempo restante de la cuenta atrás.
+     *
      * @param time Tiempo restante en formato String.
      */
     public void updateCountdownLabel(String time) {
@@ -91,15 +93,18 @@ public class CountdownUI extends JFrame {
 
     /**
      * Muestra un mensaje al finalizar la cuenta atrás.
+     *
      * @param isCancelled Indica si la cuenta atrás fue cancelada.
      */
     public void showCompletionMessage(boolean isCancelled) {
         String message = isCancelled ? "Launch Cancelled" : "Launch Successful";
         JOptionPane.showMessageDialog(this, message);
+        showFinalMessage(isCancelled);
     }
 
     /**
      * Actualiza la cuenta atrás en la interfaz de usuario.
+     *
      * @param remainingSeconds Segundos restantes.
      */
     public void updateCountdown(int remainingSeconds) {
@@ -108,6 +113,7 @@ public class CountdownUI extends JFrame {
 
     /**
      * Formatea los segundos restantes en un formato de tiempo mm:ss.
+     *
      * @param totalSeconds Segundos totales.
      * @return Tiempo formateado como String.
      */
@@ -116,5 +122,18 @@ public class CountdownUI extends JFrame {
         int seconds = totalSeconds % 60;
         return String.format("%02d:%02d", minutes, seconds);
     }
+
+    /**
+     * Muestra una ventana emergente al finalizar la cuenta atrás o cuando se cancela.
+     *
+     * @param isCancelled Indica si la cuenta atrás fue cancelada.
+     */
+    private void showFinalMessage(boolean isCancelled) {
+        String message = isCancelled ? "Launch Canceled" : "Successful Launch";
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame, message);
+    }
 }
+
+
 
