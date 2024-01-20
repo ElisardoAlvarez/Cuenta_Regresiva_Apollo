@@ -1,58 +1,44 @@
 package main;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 public class CountdownTask extends Thread {
-    enum State { ACTIVE, CANCELLED, COMPLETED }
+    private Logger logger;
+    private int countdownSeconds;
+    private CountdownUI countdownUI; // Interfaz de usuario para la cuenta regresiva
 
-    private final int totalSeconds;
-    private final CountdownUI ui;
-    private final Logger logger;
-    private State currentState;
-
-    public CountdownTask(int totalSeconds, CountdownUI ui, Logger logger) {
-        this.totalSeconds = totalSeconds;
-        this.ui = ui;
+    public CountdownTask(Logger logger, int countdownSeconds, CountdownUI countdownUI) {
         this.logger = logger;
-        this.currentState = State.ACTIVE;
-        logger.log(Level.INFO, "Countdown task initialized for " + totalSeconds + " seconds.");
+        this.countdownSeconds = countdownSeconds;
+        this.countdownUI = countdownUI; // Inicializa la interfaz de usuario para la cuenta regresiva
     }
 
     @Override
     public void run() {
-        logger.log(Level.INFO, "Countdown task started. State: " + currentState);
         try {
-            for (int i = totalSeconds; i >= 0; i--) {
-                if (Thread.interrupted()) {
-                    currentState = State.CANCELLED;
-                    logger.log(Level.INFO, "Countdown task interrupted and cancelled. State: " + currentState);
-                    break;
-                }
-                int finalI = i;
-                SwingUtilities.invokeLater(() -> ui.updateCountdownLabel(formatTime(finalI)));
+            for (int i = countdownSeconds; i >= 0; i--) {
+                final int remainingSeconds = i;
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        countdownUI.updateCountdown(remainingSeconds); // Actualiza la interfaz de usuario con los segundos restantes
+                    }
+                });
+                logger.info("Tiempo restante: " + i + " segundos");
                 Thread.sleep(1000);
             }
-            if (currentState != State.CANCELLED) {
-                currentState = State.COMPLETED;
-                logger.log(Level.INFO, "Countdown task completed successfully. State: " + currentState);
-            }
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            currentState = State.CANCELLED;
-            logger.log(Level.WARNING, "Countdown task interrupted due to an exception. State: " + currentState, e);
-        } finally {
-            SwingUtilities.invokeLater(() -> ui.showCompletionMessage(currentState == State.CANCELLED));
+            logger.severe("La tarea de cuenta regresiva fue interrumpida");
         }
     }
 
-    private String formatTime(int totalSeconds) {
-        int minutes = totalSeconds / 60;
-        int seconds = totalSeconds % 60;
-        return String.format("%02d:%02d", minutes, seconds);
-    }
-
     public State getCurrentState() {
-        return currentState;
+        if (isInterrupted()) {
+            return State.BLOCKED;
+        } else if (isAlive()) return State.WAITING;
+        else {
+            return State.TERMINATED;
+        }
     }
 }
